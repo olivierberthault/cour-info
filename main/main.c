@@ -17,3 +17,12 @@ int main (int ac, char **av)
 	print_arguments(av);
 	return 0;
 }
+int ft_atoi(char*nb)
+{
+	int i = 0;
+
+	while(nb[i] != '\0')
+	{
+		i++;
+	}
+}
