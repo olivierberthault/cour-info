@@ -37,6 +37,24 @@ struct s_time convert_second_into_duration(const unsigned long second_count)
 	return duration;
 }
 
+void print_countdown(unsigned long second_count)
+{
+	struct s_time duration;
+	unsigned long i;
+
+	i = 0;
+	printf(HIDE_CURSOR);
+	while(i <= second_count)
+	{
+		duration = convert_second_into_duration(second_count - i);
+		print_time(duration);
+		fflush(stdout);
+		sleep(1);
+		printf(REPLACE);
+		i++;
+	}
+	printf(SHOW_CURSOR);
+}
 int main(int ac, char** av)
 {
 	
@@ -47,22 +65,8 @@ int main(int ac, char** av)
 	}
 	else
 	{
-		struct s_time duration;
 		const unsigned long time_input = strtoul(av[1], av + 1, 10);
-		unsigned long i;
-
-		i = 0;
-		printf(HIDE_CURSOR);
-		while(i <= time_input)
-		{
-			duration = convert_second_into_duration(time_input - i);
-			print_time(duration);
-			fflush(stdout);
-			sleep(1);
-			printf(REPLACE);
-			i++;
-		}
-		printf(SHOW_CURSOR);
+		print_countdown(time_input);
 		return EXIT_SUCCESS;
 	}
 }
