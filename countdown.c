@@ -80,7 +80,6 @@ int main(int ac, char** av)
 	if(ac != 5)
 	{
 		printf("Usage : ./countdown <day> <hour> <minute> <second> \n");
-		return EXIT_FAILURE;
 	}
 	else
 	{
