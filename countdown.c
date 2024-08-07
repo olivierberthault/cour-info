@@ -55,18 +55,45 @@ void print_countdown(unsigned long second_count)
 	}
 	printf(SHOW_CURSOR);
 }
+
+unsigned long convert_array_into_seconds(unsigned long times[4])
+{
+	unsigned long times_factor[] = {86400, 3600, 60, 1};
+	unsigned long seconds;
+	int i;
+
+	seconds = 0;
+
+	i = 0;
+	while(i < 4)
+	{
+		seconds += times[i] * times_factor[i];
+		i++;
+	}
+
+	return seconds;
+}
+
 int main(int ac, char** av)
 {
 	
-	if(ac != 2)
+	if(ac != 5)
 	{
-		printf("Il ne faut qu'un argument : ./time <second_count> \n");
+		printf("Usage : ./countdown <day> <hour> <minute> <second> \n");
 		return EXIT_FAILURE;
 	}
 	else
 	{
-		const unsigned long time_input = strtoul(av[1], av + 1, 10);
-		print_countdown(time_input);
+		unsigned long times[] = {0, 0, 0, 0};
+		unsigned long total_seconds;
+		int i = 0;
+		while(i < 4)
+		{
+			times[i] = strtoul(av[i + 1], av + i + 1, 10);
+			i++;
+		}
+		total_seconds = convert_array_into_seconds(times);
+		print_countdown(total_seconds);
 		return EXIT_SUCCESS;
 	}
 }
