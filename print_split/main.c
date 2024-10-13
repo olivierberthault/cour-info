@@ -3,8 +3,8 @@
 void split(char* str)
 {
 	int i = 0;
-	bool  is_whitespace;
-	bool  was_whitespace;
+	bool  is_whitespace = false;
+
 	while(str[i] != '\0')
 	{
 		if(str[i] == ' ')
@@ -13,17 +13,28 @@ void split(char* str)
 		}
 		else
 		{
+			if(is_whitespace == true)
+			{
+				printf("\n");
+			}
+			printf("%c", str[i]);
 			is_whitespace = false ;
 		}
-		if (is_whitespace == false)
-		{
-			printf("%c", str[i]);
-		}
+		
 		++i;
 	}
+	printf("\n");
 }
 int main(int ac, char** av)
 {
-	split(av[1]);
-	return 0;
+	if(ac < 2)
+	{
+		printf("%s arg 1 \n", av[0]);
+		return 1;
+	}
+	else
+	{
+		split(av[1]);
+		return 0;
+	}
 }
